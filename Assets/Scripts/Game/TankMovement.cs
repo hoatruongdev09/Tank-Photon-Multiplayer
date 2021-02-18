@@ -32,6 +32,9 @@ namespace Game {
             m_TurnInputValue = 0f;
 
             m_particleSystems = GetComponentsInChildren<ParticleSystem> ();
+            if (photonView.IsMine) {
+                CameraControl.Instance.TargetFocus = transform;
+            }
             for (int i = 0; i < m_particleSystems.Length; ++i) {
                 m_particleSystems[i].Play ();
             }
@@ -63,7 +66,7 @@ namespace Game {
             // if(!canControl) return;
             m_MovementInputValue = Input.GetAxis (m_MovementAxisName);
             m_TurnInputValue = Input.GetAxis (m_TurnAxisName);
-
+            
             EngineAudio ();
         }
         private void EngineAudio () {

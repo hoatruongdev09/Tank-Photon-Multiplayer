@@ -1,5 +1,6 @@
 ﻿using System;
 using ExitGames.Client.Photon;
+using Game;
 using Photon.Pun;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class UIManager : MonoBehaviourPunCallbacks {
     [SerializeField] private PanelJoinRoom _panelJoinRoom;
     [SerializeField] private PanelCreateRoom _panelCreateRoom;
     [SerializeField] private PanelInRoom _panelInRoom;
+    [SerializeField] private PanelInGame _panelInGame;
     private void Awake () {
         if (Instance == null) { Instance = this; }
     }
@@ -33,6 +35,7 @@ public class UIManager : MonoBehaviourPunCallbacks {
     }
     public void StartGame () {
         _panelInRoom.gameObject.SetActive (false);
+        _panelInGame.gameObject.SetActive(true);
     }
     private void OnBackToLobby () {
         PhotonNetwork.LeaveRoom (true);
@@ -49,6 +52,7 @@ public class UIManager : MonoBehaviourPunCallbacks {
     public override void OnJoinedLobby () {
         Debug.Log ($"Lobby joined UI");
         loadingPanel.gameObject.SetActive (false);
+        _panelInGame.gameObject.SetActive(false);
         _panelJoinRoom.gameObject.SetActive (true);
     }
 
@@ -56,11 +60,13 @@ public class UIManager : MonoBehaviourPunCallbacks {
         _panelInRoom.gameObject.SetActive (true);
         _panelCreateRoom.gameObject.SetActive (false);
         _panelJoinRoom.gameObject.SetActive (false);
+        _panelInGame.gameObject.SetActive(false);
     }
 
     public override void OnLeftRoom () {
         _panelInRoom.gameObject.SetActive (false);
         _panelCreateRoom.gameObject.SetActive (false);
         _panelJoinRoom.gameObject.SetActive (false);
+        _panelInGame.gameObject.SetActive(false);
     }
 }

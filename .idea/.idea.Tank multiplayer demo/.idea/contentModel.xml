@@ -433,6 +433,7 @@
             <e p="CameraControl.cs" t="Include" />
           </e>
           <e p="Game" t="Include">
+            <e p="CameraControl.cs" t="Include" />
             <e p="GameController.cs" t="Include" />
             <e p="GameEventDefine.cs" t="Include" />
             <e p="NetworkPhotonManager.cs" t="Include" />
@@ -456,7 +457,10 @@
             <e p="TankShooting.cs" t="Include" />
           </e>
           <e p="UI" t="Include">
+            <e p="LeaderboardOverView.cs" t="Include" />
+            <e p="LeaderboardRecordView.cs" t="Include" />
             <e p="PanelCreateRoom.cs" t="Include" />
+            <e p="PanelInGame.cs" t="Include" />
             <e p="PanelInRoom.cs" t="Include" />
             <e p="PanelJoinRoom.cs" t="Include" />
             <e p="PlayerRecordView.cs" t="Include" />

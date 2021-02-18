@@ -1,25 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="732b1d9a-42ce-4d12-9047-51c2656ce9e2" name="Default Changelist" comment="" />
+    <list default="true" id="732b1d9a-42ce-4d12-9047-51c2656ce9e2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Tank multiplayer demo/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Tank multiplayer demo/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Tank multiplayer demo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Tank multiplayer demo/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/NetworkPhotonManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/NetworkPhotonManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/ShellExplosion.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/ShellExplosion.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/TankHealth.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/TankHealth.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/TankMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/TankMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/TankShooting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/TankShooting.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/UIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/PanelInRoom.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/PanelInRoom.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/PlayerRecordView.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/PanelCreateRoom.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/CameraControl.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UIManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/GameEventDefine.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/PanelInRoom.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/TankMovement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file:///Applications/Unity/Hub/Editor/2020.1.9f1/Unity.app/Contents/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/InputModules/BaseInput.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/PanelJoinRoom.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/TankHealth.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/RoomRecordView.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/LeaderboardOverView.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/ShellExplosion.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/GameController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/PanelInGame.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/LeaderboardRecordView.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/PlayerRecordView.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/PanelCreateRoom.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/PanelInRoom.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/PanelJoinRoom.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/RoomRecordView.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -28,21 +68,26 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/PanelCreateRoom.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/PanelJoinRoom.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/PlayerRecordView.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/NetworkPhotonManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/UI/PanelInRoom.cs" />
         <option value="$PROJECT_DIR$/Assets/_Completed-Assets/Scripts/Tank/TankHealth.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UIManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ShellExplosion.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/TankInfo.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/GameEventDefine.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/TankMovement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/LeaderboardRecordView.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/TankShooting.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/TankHealth.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/NetworkPhotonManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/ShellExplosion.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/LeaderboardOverView.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/CameraControl.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/TankMovement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UIManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/PanelInRoom.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/GameController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/PanelInGame.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/TankHealth.cs" />
       </list>
     </option>
   </component>
   <component name="ProjectId" id="1nv2mYfhky3pUVh5Axchy8fAPM5" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -53,7 +98,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.CSS" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -97,7 +142,8 @@
       <workItem from="1612426315170" duration="72000" />
       <workItem from="1612426440769" duration="958000" />
       <workItem from="1612428019081" duration="6150000" />
-      <workItem from="1613550355823" duration="1823000" />
+      <workItem from="1613550355823" duration="5551000" />
+      <workItem from="1613616068649" duration="11371000" />
     </task>
     <servers />
   </component>
@@ -106,15 +152,30 @@
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="411" y="138" key="SettingsEditor" timestamp="1613550493226">
+    <state x="411" y="138" key="SettingsEditor" timestamp="1613635835093">
       <screen x="0" y="25" width="1680" height="974" />
     </state>
     <state x="352" y="121" key="SettingsEditor/0.25.1440.824@0.25.1440.824" timestamp="1612426732434" />
-    <state x="411" y="138" key="SettingsEditor/0.25.1680.974@0.25.1680.974" timestamp="1613550493226" />
+    <state x="411" y="138" key="SettingsEditor/0.25.1680.974@0.25.1680.974" timestamp="1613635835093" />
     <state x="469" y="223" key="SettingsEditor/0.25.1920.1124@0.25.1920.1124" timestamp="1612426386501" />
+    <state x="503" y="237" width="672" height="678" key="search.everywhere.popup" timestamp="1613635849602">
+      <screen x="0" y="25" width="1680" height="974" />
+    </state>
+    <state x="503" y="237" width="672" height="678" key="search.everywhere.popup/0.25.1680.974@0.25.1680.974" timestamp="1613635849602" />
   </component>
 </project>

@@ -12,6 +12,9 @@ public class PanelInRoom : MonoBehaviourPunCallbacks {
     [SerializeField] private Button _buttonBack;
     [SerializeField] private Button _buttonReady;
     [SerializeField] private Text _textReadyButton;
+    [SerializeField] private Text _textCountDown;
+
+    [SerializeField] private GameObject _countDownHolder;
 
     [SerializeField] private PlayerRecordView _playerRecordPrefab;
     [SerializeField] private RectTransform playerContent;
@@ -84,20 +87,25 @@ public class PanelInRoom : MonoBehaviourPunCallbacks {
     private IEnumerator DelayToStartGame (int time, Action callback) {
         isLockCountDown = true;
         float countDownTime = time;
+        _countDownHolder.gameObject.SetActive(true);
         while (countDownTime > 0 && isLockCountDown) {
             countDownTime -= Time.deltaTime;
+            _textCountDown.text = $"GAME START IN {Mathf.CeilToInt(countDownTime)}";
             yield return null;
         }
         if (isLockCountDown) {
             isLockCountDown = false;
             callback ();
         }
+        _countDownHolder.gameObject.SetActive(false);
     }
     private void RaiseStartGame () {
         Debug.Log ($"Raise event");
-        GameController.Instance.StartGame ();
+        // GameController.Instance.StartGame ();
         UIManager.Instance.StartGame ();
-        PhotonNetwork.RaiseEvent (GameEventDefine.START_GAME, new object[] { }, RaiseEventOptions.Default, SendOptions.SendReliable);
+        var raiseOptions = new RaiseEventOptions() {Receivers = ReceiverGroup.All};
+        PhotonNetwork.RaiseEvent(GameEventDefine.START_GAME, null, raiseOptions,
+            SendOptions.SendReliable);
     }
     private void UpdateListPlayer () {
         foreach (var player in PhotonNetwork.CurrentRoom.Players) CreatePlayer (player.Value);

@@ -1,25 +1,25 @@
-using System;
 using ExitGames.Client.Photon;
 using Photon.Pun;
+using Photon.Pun.UtilityScripts;
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game {
     public class TankHealth : MonoBehaviourPun {
-        public float m_StartingHealth = 100f; 
-        public Slider m_Slider; 
-        public Image m_FillImage; 
-        public Color m_FullHealthColor = Color.green; 
-        public Color m_ZeroHealthColor = Color.red; 
+        public float m_StartingHealth = 100f;
+        public Slider m_Slider;
+        public Image m_FillImage;
+        public Color m_FullHealthColor = Color.green;
+        public Color m_ZeroHealthColor = Color.red;
 
-        public GameObject m_ExplosionPrefab; 
+        public GameObject m_ExplosionPrefab;
 
-        private float m_CurrentHealth; 
-        private bool m_Dead; 
+        private float m_CurrentHealth;
+        private bool m_Dead;
 
 
-        private AudioSource m_ExplosionAudio; 
+        private AudioSource m_ExplosionAudio;
         private ParticleSystem m_ExplosionParticles;
 
         private void Awake() {
@@ -33,20 +33,28 @@ namespace Game {
             m_Dead = false;
         }
 
-        public void TakeDamage(float amount) {
-            photonView.RPC("RpcTakeDamage",RpcTarget.All,photonView.ViewID,amount);
+        public void TakeDamage(Player fromPlayer, float amount) {
+            photonView.RPC("RpcTakeDamage", RpcTarget.All, photonView.ViewID, fromPlayer, amount);
         }
+
         [PunRPC]
-        private void RpcTakeDamage(int viewID, float amount) {
-            if(viewID != this.photonView.ViewID) return;
+        private void RpcTakeDamage(int viewID, Player fromPlayer, float amount) {
+            if (viewID != photonView.ViewID) return;
             m_CurrentHealth -= amount;
             SetHealthUI();
-            if(m_CurrentHealth<=0 && !m_Dead) OnDeath();
+            if (m_CurrentHealth <= 0 && !m_Dead) {
+                OnDeath();
+                if (photonView.Owner == fromPlayer) return;
+                fromPlayer.AddScore(1);
+            }
+            
         }
+
         private void SetHealthUI() {
             m_Slider.value = m_CurrentHealth;
             m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_StartingHealth);
         }
+
         private void OnDeath() {
             m_Dead = true;
             m_ExplosionParticles.transform.position = transform.position;
@@ -54,8 +62,9 @@ namespace Game {
             m_ExplosionParticles.Play();
             m_ExplosionAudio.Play();
             gameObject.SetActive(false);
+            if(!photonView.IsMine) return;
             var tankDestroyData = new object[] {PhotonNetwork.LocalPlayer, photonView.ViewID};
-            var raiseOptions = new RaiseEventOptions() {Receivers = ReceiverGroup.All};
+            var raiseOptions = new RaiseEventOptions {Receivers = ReceiverGroup.All};
             PhotonNetwork.RaiseEvent(GameEventDefine.TANK_DESTROY, tankDestroyData, raiseOptions,
                 SendOptions.SendReliable);
         }

@@ -1,97 +1,90 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using ExitGames.Client.Photon;
-using Game;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 
 public class GameController : MonoBehaviourPunCallbacks {
-    private readonly List<TankInfo> listTanks = new List<TankInfo> ();
-    private TankInfo localTankInfo;
+    [SerializeField] private Transform[] spawnHolders;
+    [SerializeField] private Transform playgroundHolder;
+    private List<Vector3> spawnPositions;
     public static GameController Instance { get; private set; }
 
-    private void Awake () {
+    private void Awake() {
         if (Instance == null) Instance = this;
     }
 
-    public override void OnEnable () {
+    public override void OnEnable() {
         PhotonNetwork.NetworkingClient.EventReceived += OnGameStart;
         PhotonNetwork.NetworkingClient.EventReceived += OnTankDestroy;
         PhotonNetwork.NetworkingClient.EventReceived += OnGameBegin;
     }
 
-    public override void OnDisable () {
+    public override void OnDisable() {
         PhotonNetwork.NetworkingClient.EventReceived -= OnGameStart;
         PhotonNetwork.NetworkingClient.EventReceived -= OnTankDestroy;
         PhotonNetwork.NetworkingClient.EventReceived -= OnGameBegin;
     }
 
-    private void OnGameBegin (EventData obj) {
+    private void OnGameBegin(EventData obj) {
         if (obj.Code != GameEventDefine.GAME_BEGIN) return;
-        Debug.Log ("game begin");
+        Debug.Log("game begin");
     }
 
-    private void OnTankDestroy (EventData obj) {
+    private void OnTankDestroy(EventData obj) {
         if (obj.Code != GameEventDefine.TANK_DESTROY) return;
         if (!PhotonNetwork.IsMasterClient) return;
         var data = (object[]) obj.CustomData;
         Debug.Log("on tank destroy event");
-        var player = (Player) data[0];
+        // var player = (Player) data[0];
         var tankViewID = (int) data[1];
-        StartCoroutine (RespawnTank (tankViewID, 3));
+        StartCoroutine(RespawnTank(tankViewID, 5));
     }
 
-    private void OnGameStart (EventData photonEvent) {
+    private void OnGameStart(EventData photonEvent) {
         if (photonEvent.Code != GameEventDefine.START_GAME) return;
-        StartGame ();
+        FindObjectOfType<LeaderboardOverView>().UpdateBoard();
+        playgroundHolder.gameObject.SetActive(true);
+        StartGame();
     }
 
-    public void StartGame () {
-        Debug.Log ("Game start");
-        CreatePlayer ();
+    public void StartGame() {
+        if (!PhotonNetwork.IsMasterClient) return;
+        spawnPositions = spawnHolders.Select(holder => holder.position).ToList();
+        foreach (var player in PhotonNetwork.CurrentRoom.Players.Values) {
+            var randomIndex = Random.Range(0, spawnPositions.Count);
+            CreateTankForPlayer(player, spawnPositions[randomIndex], Quaternion.identity);
+            spawnPositions.RemoveAt(randomIndex);
+        }
+
+        // CreatePlayer ();
     }
 
-    private IEnumerator RespawnTank (int tankID, float time) {
-        yield return new WaitForSeconds (time);
-        photonView.RPC ("RpcEnableTank", RpcTarget.All, tankID);
+    private IEnumerator RespawnTank(int tankID, float time) {
+        yield return new WaitForSeconds(time);
+        photonView.RPC("RpcEnableTank", RpcTarget.All, tankID);
     }
-
-    private void CreatePlayer () {
-        var tank = PhotonNetwork.Instantiate ("Tank", new Vector3 (Random.Range (0f, 6f), 0, Random.Range (0f, 6f)),
-            Quaternion.identity);
-        if(!photonView.IsMine) return;
-        localTankInfo = tank.GetComponent<TankInfo> ();
-        photonView.RPC ("RpcPlayerReady", RpcTarget.MasterClient, PhotonNetwork.LocalPlayer,
-            tank.GetPhotonView ().ViewID);
+    [PunRPC]
+    private void RpcCreateTankForPlayer( float[] position, float[] rotation) {
+        Vector3 receivedPosition = new Vector3(position[0],position[1],position[2]);
+        Quaternion receivedRotation = Quaternion.Euler(rotation[0],rotation[1],rotation[2]);
+        // if(PhotonNetwork.LocalPlayer != player) return;
+        var tank = PhotonNetwork.Instantiate("Tank", receivedPosition, receivedRotation);
+    }
+    private void CreateTankForPlayer(Player player, Vector3 position, Quaternion rotation) {
+        var sendPosition = new float[] {position.x, position.y, position.z};
+        var sendRotation = new float[] {rotation.x, rotation.y, rotation.z};
+        photonView.RPC("RpcCreateTankForPlayer",player,sendPosition,sendRotation);
     }
 
     [PunRPC]
-    private void RpcEnableTank (int tankViewID) {
+    private void RpcEnableTank(int tankViewID) {
         var tank = PhotonView.Find(tankViewID);
-        if(tank == null) return;
+        if (tank == null) return;
+        var spawnPosition = spawnHolders[Random.Range(0, spawnHolders.Length)].position;
+        tank.transform.position = spawnPosition;
         tank.gameObject.SetActive(true);
-    }
-
-    [PunRPC]
-    private void RpcPlayerReady (Player player, int tankViewID) {
-        if (!PhotonNetwork.IsMasterClient) return;
-        var tank = PhotonView.Find (tankViewID)?.GetComponent<TankInfo> ();
-        tank.ownPlayer = player;
-        listTanks.Add (tank);
-        OnPlayerReady ();
-    }
-
-    private void OnPlayerReady () {
-        if (!PhotonNetwork.IsMasterClient) return;
-        if (listTanks.Count != PhotonNetwork.CurrentRoom.MaxPlayers) return;
-        StartCoroutine (DelayToStartGame (3));
-    }
-
-    private IEnumerator DelayToStartGame (float time) {
-        yield return new WaitForSeconds (time);
-        Debug.Log ("All player ready");
-        PhotonNetwork.RaiseEvent (GameEventDefine.GAME_BEGIN, new object[] { }, RaiseEventOptions.Default,
-            SendOptions.SendReliable);
     }
 }

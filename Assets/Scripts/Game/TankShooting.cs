@@ -45,11 +45,8 @@ namespace Game {
 
         private void Update () {
             if (!photonView.IsMine) { return; }
-            // if(!canControl) return;
             m_AimSlider.value = m_MinLaunchForce;
-
             if (m_CurrentLaunchForce >= m_MaxLaunchForce && !m_Fired) {
-
                 m_CurrentLaunchForce = m_MaxLaunchForce;
                 Fire ();
             } else if (Input.GetButtonDown (m_FireButton)) {
@@ -65,7 +62,6 @@ namespace Game {
 
                 m_AimSlider.value = m_CurrentLaunchForce;
             } else if (Input.GetButtonUp (m_FireButton) && !m_Fired) {
-
                 Fire ();
             }
 
@@ -75,8 +71,9 @@ namespace Game {
             m_Fired = true;
             // Rigidbody shellInstance = Instantiate (m_Shell, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
             Rigidbody shellInstance = PhotonNetwork.Instantiate ("TankShell", m_FireTransform.position, m_FireTransform.rotation).GetComponent<Rigidbody> ();
+            var shellExplosion = shellInstance.GetComponent<ShellExplosion>();
+            shellExplosion.fromPlayer = PhotonNetwork.LocalPlayer;
             shellInstance.velocity = m_CurrentLaunchForce * m_FireTransform.forward;
-
             m_ShootingAudio.clip = m_FireClip;
             m_ShootingAudio.Play ();
 
